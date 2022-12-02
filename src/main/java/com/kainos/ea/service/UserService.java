@@ -16,6 +16,6 @@ public class UserService {
     }
 
     public Token registerUser(User user) throws SQLException {
-        return userDao.register(user);
+        return userDao.doRegister(user);
     }
 }

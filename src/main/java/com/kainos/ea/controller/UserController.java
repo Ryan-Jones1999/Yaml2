@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Api("API for User Application app")
 @Path("/api")
@@ -28,7 +29,7 @@ public class UserController {
    public Response createUser(User user) {
       try {
          return Response.ok(userService.registerUser(user)).build();
-      } catch(Exception e) {
+      } catch(SQLException e) {
          return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
       }
    }

@@ -14,20 +14,20 @@ import static com.kainos.ea.util.DatabaseConnector.getConnection;
 
 public class UserDao {
 
-    public Token register(User user) {
+    public Token doRegister(User user) {
         try {
 
             if (user.getPassword() == null) {
                 throw new InvalidPasswordException();
             }
-            if (!user.getEmail().contains("@")) {
+            if (user.getEmail() == null) {
                 throw new InvalidEmailException();
             }
 
-            Connection c = getConnection();
+            Connection connection = getConnection();
             String insertQuery = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
 
-            PreparedStatement preparedStatement = Objects.requireNonNull(c).prepareStatement(insertQuery);
+            PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(insertQuery);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getRole());
@@ -38,9 +38,10 @@ public class UserDao {
                 token.generateToken(user);
 
                 return token;
-            } else {
-                return null;
             }
+
+            return null;
+
             } catch (SQLException | InvalidPasswordException | InvalidEmailException e) {
                 throw new RuntimeException(e);
         }

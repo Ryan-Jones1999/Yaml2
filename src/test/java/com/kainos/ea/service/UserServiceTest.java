@@ -28,7 +28,7 @@ public class UserServiceTest {
         );
 
         Token expectedResult = new Token("token");
-        Mockito.when(userDao.register(user)).thenReturn(expectedResult);
+        Mockito.when(userDao.doRegister(user)).thenReturn(expectedResult);
 
         Token result = new Token("token");
 

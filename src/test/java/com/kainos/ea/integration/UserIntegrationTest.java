@@ -23,9 +23,9 @@ public class UserIntegrationTest {
     );
 
     @Test
-    void register_shouldReturnError500_whenEmailDoesNotContainAt() {
+    void register_shouldReturnError500_whenEmailisNull() {
         User user = new User(
-                "Somethinganything.com",
+                null,
                 "Password!",
                 "Admin"
         );
