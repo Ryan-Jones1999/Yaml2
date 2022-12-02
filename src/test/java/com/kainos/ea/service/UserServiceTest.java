@@ -24,7 +24,9 @@ public class UserServiceTest {
         User user = new User(
                 "Something@anything.com",
                 "Password!",
-                "Admin"
+                "Admin",
+                "John",
+                "Doe"
         );
 
         Token expectedResult = new Token("token");

@@ -27,7 +27,9 @@ public class UserIntegrationTest {
         User user = new User(
                 null,
                 "Password!",
-                "Admin"
+                "Admin",
+                "John",
+                "Doe"
         );
 
         Response response = APP.client().target("http://localhost:8080/api/register")
@@ -44,7 +46,9 @@ public class UserIntegrationTest {
         User user = new User(
                 "Something@anything.com",
                 null,
-                "Admin"
+                "Admin",
+                "John",
+                "Doe"
         );
 
         Response response = APP.client().target("http://localhost:8080/api/register")

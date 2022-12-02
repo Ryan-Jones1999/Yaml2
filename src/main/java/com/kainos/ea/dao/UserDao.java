@@ -25,12 +25,14 @@ public class UserDao {
             }
 
             Connection connection = getConnection();
-            String insertQuery = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO user (email, password, role, firstName, lastName) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = Objects.requireNonNull(connection).prepareStatement(insertQuery);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getRole());
+            preparedStatement.setString(4, user.getFirstName());
+            preparedStatement.setString(5, user.getLastName());
 
 
             if(preparedStatement.executeUpdate() > 0) {
