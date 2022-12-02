@@ -1,10 +1,10 @@
 package com.kainos.ea.validator;
 
-import com.kainos.ea.model.NewRoleRequest;
+import com.kainos.ea.model.NewRole;
 
 public class NewJobRoleValidation {
 
-    public boolean isValid(NewRoleRequest role){
+    public boolean NewRoleValidation(NewRole role){
         if(role.getJobFamilyID() < 1 || role.getBandLevelID() < 1 || role.getCapabilityID() < 1){
             return false;
         }
@@ -17,10 +17,7 @@ public class NewJobRoleValidation {
             return false;
         }
 
-        if(role.getSpecSummary().length() < 8){
-            return false;
-        }
+        return role.getSpecSummary().length() >= 8;
 
-        return true;
     }
 }

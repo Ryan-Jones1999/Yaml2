@@ -3,7 +3,7 @@ package com.kainos.ea.integration;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.model.JobRole;
-import com.kainos.ea.model.NewRoleRequest;
+import com.kainos.ea.model.NewRole;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -168,7 +168,7 @@ public class JobIntegrationTest {
 
     @Test
     void postAddValidRole_ShouldReturnRoleRequest() {
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is a test",
                 "This is also a test",
@@ -177,9 +177,9 @@ public class JobIntegrationTest {
                 1
         );
 
-        NewRoleRequest result = APP.client().target("http://localhost:8080/api/addnewrole")
+        NewRole result = APP.client().target("http://localhost:8080/api/addnewrole")
                 .request()
-                .post(Entity.entity(newrole, MediaType.APPLICATION_JSON_TYPE)).readEntity(NewRoleRequest.class);
+                .post(Entity.entity(newrole, MediaType.APPLICATION_JSON_TYPE)).readEntity(NewRole.class);
 
         Assertions.assertEquals(newrole.getJobName(), result.getJobName());
         Assertions.assertEquals(newrole.getJobResponsibility(), result.getJobResponsibility());
@@ -189,7 +189,7 @@ public class JobIntegrationTest {
 
     @Test
     void postAddInvalidRole_ShouldReturn400WhenJobNameTooShort(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This",
                 "This is a test",
                 "This is also a test",
@@ -207,7 +207,7 @@ public class JobIntegrationTest {
 
     @Test
     void postAddInvalidRole_ShouldReturn400WhenJobResponsibilityTooShort(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a valid test",
                 "Invalid",
                 "This is also a test",
@@ -225,7 +225,7 @@ public class JobIntegrationTest {
 
     @Test
     void postAddInvalidRole_ShouldReturn400WhenSpecificationTooShort(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a valid test",
                 "This is a valid test",
                 "NAN",
@@ -243,7 +243,7 @@ public class JobIntegrationTest {
 
     @Test
     void postAddInvalidRole_ShouldReturn400WhenJobFamilyLessThan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a valid test",
                 "This is a valid test",
                 "This is valid",
@@ -260,7 +260,7 @@ public class JobIntegrationTest {
     }
     @Test
     void postAddInvalidRole_ShouldReturn400WhenBandLevelLessThan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a valid test",
                 "This is a valid test",
                 "This is valid",
@@ -277,7 +277,7 @@ public class JobIntegrationTest {
     }
     @Test
     void postAddInvalidRole_ShouldReturn400WhenCapabilityLevelLessThan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a valid test",
                 "This is a valid test",
                 "This is valid",

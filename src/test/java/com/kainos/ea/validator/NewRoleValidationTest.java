@@ -1,17 +1,20 @@
 package com.kainos.ea.validator;
 
-import com.kainos.ea.model.NewRoleRequest;
+import com.kainos.ea.model.NewRole;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddNewRole {
+@ExtendWith(MockitoExtension.class)
+class NewRoleValidationTest {
 
     NewJobRoleValidation validator = new NewJobRoleValidation();
 
     @Test
     public void isValidNewRole_shouldReturnTrue_whenValidRole(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is a test",
                 "This is also a test",
@@ -20,12 +23,12 @@ class AddNewRole {
                 1
         );
 
-        assertTrue(validator.isValid(newrole));
+        assertTrue(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenJobNameLessThan5Characters(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "Ths",
                 "This is a test",
                 "This is also a test",
@@ -34,12 +37,12 @@ class AddNewRole {
                 1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenJobResponsibilityLessThan10Characters(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This",
                 "This is also a test",
@@ -48,12 +51,12 @@ class AddNewRole {
                 1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenSpecificationSummaryLessThan8Characters(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is test sss",
                 "This",
@@ -62,12 +65,12 @@ class AddNewRole {
                 1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenBandLevelLessthan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is test sss",
                 "This ist dsfdsfdsdfs",
@@ -76,12 +79,12 @@ class AddNewRole {
                 1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenCapabilityLevelLessThan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is test sss",
                 "This ist dsfdsfdsdfs",
@@ -90,12 +93,12 @@ class AddNewRole {
                 -1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 
     @Test
     public void isValidNewRole_shouldReturnFalse_whenJobFamilyLevelLessThan1(){
-        NewRoleRequest newrole = new NewRoleRequest(
+        NewRole newrole = new NewRole(
                 "This is a test",
                 "This is test sss",
                 "This ist dsfdsfdsdfs",
@@ -104,6 +107,6 @@ class AddNewRole {
                 1
         );
 
-        assertFalse(validator.isValid(newrole));
+        assertFalse(validator.NewRoleValidation(newrole));
     }
 }
