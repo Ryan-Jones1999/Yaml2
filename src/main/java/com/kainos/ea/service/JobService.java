@@ -5,7 +5,6 @@ import com.kainos.ea.exception.DatabaseException;
 import com.kainos.ea.exception.NotAValidBandLevelException;
 import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class JobService {
     public List<Competency> competency(int bandID) throws DatabaseException, SQLException, NotAValidBandLevelException {
 
         if(bandID < 0 || bandID > 8){
-            throw new NotAValidBandLevelException();
+            throw new NotAValidBandLevelException("Error invalid band", new Exception());
         }
 
         List<Competency> comp;
@@ -60,9 +59,7 @@ public class JobService {
         if(comp.size() <1){
             throw new DatabaseException("Error in competency call", new Exception());
         }
-
         return comp;
     }
-
 }
 
